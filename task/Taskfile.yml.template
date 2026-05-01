@@ -1,0 +1,21 @@
+version: "3"
+
+tasks:
+  default:
+    desc: Show common tasks
+    cmds:
+      - task -l
+
+  aws:sso:
+    desc: |
+      Login to AWS SSO and sync credentials to ~/.aws/credentials.
+      Usage: task -g aws:sso PROFILE=<your-profile>
+      Requires:
+        - AWS CLI v2  (https://docs.aws.amazon.com/cli/latest/userguide/getting-started-install.html)
+        - yawsso      (pip install yawsso)
+        - An SSO-enabled profile configured in ~/.aws/config
+    cmds:
+      - aws sso login --profile {{.PROFILE}}
+      - yawsso --profile {{.PROFILE}}
+    requires:
+      vars: [PROFILE]

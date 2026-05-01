@@ -1,20 +1,33 @@
 version: "3"
 
-# Run: task <name>
 tasks:
   default:
     desc: Show common tasks
     cmds:
       - task -l
 
+  deploy.all:
+    desc: Deploy all configurations
+    cmds:
+      - task: deploy.zsh
+      - task: deploy.starship
+      - task: deploy.task
+
   deploy.zsh:
     desc: Deploy zsh configuration
     cmds:
-      - rsync -av --progress zsh/.zshrc $HOME/
+      - rsync -av --progress --backup --suffix=.bak zsh/.zshrc $HOME/
       - echo "Zsh configuration deployed!"
 
   deploy.starship:
     desc: Deploy starship configuration
     cmds:
-      - rsync -av --progress starship/starship.toml $HOME/.config/starship.toml
+      - mkdir -p $HOME/.config
+      - rsync -av --progress --backup --suffix=.bak starship/starship.toml $HOME/.config/starship.toml
       - echo "Starship configuration deployed!"
+
+  deploy.task:
+    desc: Deploy global Taskfile template to home folder
+    cmds:
+      - rsync -av --progress --backup --suffix=.bak task/Taskfile.yml.template $HOME/Taskfile.yaml
+      - echo "Global Taskfile deployed!"

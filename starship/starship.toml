@@ -1,7 +1,8 @@
 # Get editor completions based on the config schema
 "$schema" = 'https://starship.rs/config-schema.json'
 
-# Inserts a blank line between shell prompts
+palette = 'nord'
+
 add_newline = true
 
 format = """
@@ -22,14 +23,12 @@ $cmd_duration\
 $line_break\
 $character"""
 
-[character] # The name of the module we are configuring is 'character'
-success_symbol = '[➜](bold green)' # The 'success_symbol' segment is being set to '➜' with the color 'bold green'
-
-
+[character]
+success_symbol = '[➜](bold green)'
 
 [git_branch]
 style = 'fg:green'
-symbol = ' '
+symbol = ' '
 format = '[on](white) [$symbol$branch ]($style)'
 
 [git_status]
@@ -48,7 +47,7 @@ pyenv_prefix = ''
 
 [nodejs]
 style = 'blue'
-symbol = ' '
+symbol = ' '
 
 [package]
 symbol = '📦 '
@@ -64,17 +63,16 @@ format = '[🏎 💨 $workspace]($style) '
 [kubernetes]
 disabled = false
 symbol = '☸️ '
-detect_files = ['k8s']
 
 [helm]
 format = 'via [⎈ $version](bold white) '
+detect_files = ['Chart.yaml']
 
 [docker_context]
 symbol = '🐳 '
 style = 'fg:#06969A'
 format = '[$symbol]($style) $path'
 detect_files = ['docker-compose.yml', 'docker-compose.yaml', 'Dockerfile']
-detect_extensions = ['Dockerfile']
 
 [jobs]
 symbol = '+ '
